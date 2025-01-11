@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {useState} from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [bpm, setBpm] = useState<number>(120);
+    const [playing, setIsPlaying] = useState<boolean>(false);
+    return (
+        <>
+            <div>
+                <header>
+                    <h1>Rhythm Trainer</h1>
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+                    {/* Metronome*/}
+                    <div>
+                        {/*BPM and Play Button*/}
+                        <div style={{display: "flex"}}>
+
+                            {/**/}
+                            <div>
+                                <p>{bpm} <span>BPM</span></p>
+                            </div>
+
+                            <button onClick={() => setIsPlaying(!playing)}>
+                                play
+                            </button>
+
+                        </div>
+                        <div>
+                            <div>
+                                <button onClick={() => setBpm(bpm - 1)}>Down</button>
+                                <button onClick={() => setBpm(bpm + 1)}>Up</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <p>Beat duration: {60000 / bpm} ms</p>
+                    <p>Quarter Note = {60000 / bpm} ms</p>
+                    <p>Eight Note = {(60000 / bpm) / 2} ms</p>
+                    <p>Sixteenth Note = {(60000 / bpm) / 4} ms</p>
+                    <p>Is playing: {playing ? "yes" : "no"}</p>
+                </header>
+            </div>
+        </>
+    )
 }
 
 export default App
